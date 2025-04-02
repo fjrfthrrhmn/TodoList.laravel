@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
         'title',
         'description',
@@ -17,6 +21,7 @@ class Project extends Model
         'user_id'
     ];
 
+    protected $appends = ['formated_deadline'];
 
     /**
      * Relasi ke tabel users (Setiap proyek dimiliki oleh satu user).
@@ -32,5 +37,11 @@ class Project extends Model
     function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+
+    function getFormatedDeadlineAttribute()
+    {
+        return $this->deadline ? Carbon::parse($this->deadline)->translatedFormat('l, j F Y') : null;
     }
 }

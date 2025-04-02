@@ -35,4 +35,10 @@ class ProjectController extends Controller
 
         return to_route('project.manager');
     }
+
+    function destory(String $id)
+    {
+        Project::find($id)->delete();
+        return to_route('project.manager');
+    }
 }

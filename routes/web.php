@@ -16,12 +16,13 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () 
 });
 
 Route::get('projects', function () {
-    return response()->json(['projects' => Project::all()]);
+    return response()->json(['projects' => Project::onlyTrashed()->get()]);
 });
 
 // Route untuk Actions
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('project', [ProjectController::class, 'store'])->name('project.store');
+    Route::delete('project/{id}', [ProjectController::class, 'destory'])->name('project.destroy');
     Route::put('hero/{id}', [HeroController::class, 'update'])->name('hero.update');
 });
 

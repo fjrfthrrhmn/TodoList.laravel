@@ -3,10 +3,11 @@ import ProjectsList from '@/components/main/ProjectsList';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Title from '@/components/ui/title';
 import AppLayout from '@/layouts/app-layout';
+import { RESPONSE_PROJECT } from '@/types';
 import { Head } from '@inertiajs/react';
-import { List, Plus } from 'lucide-react';
+import { List, Plus, Trash2 } from 'lucide-react';
 
-export default function ProjectManager() {
+export default function ProjectManager({ projects }: { projects: RESPONSE_PROJECT[] }) {
     return (
         <AppLayout>
             <Head title="Project Manajer" />
@@ -28,9 +29,13 @@ export default function ProjectManager() {
                             <Plus />
                             Tambah Project
                         </TabsTrigger>
+                        <TabsTrigger className="lg:px-10" value="trashproject">
+                            <Trash2 />
+                            Sampah Project
+                        </TabsTrigger>
                     </TabsList>
                     <TabsContent value="projects">
-                        <ProjectsList />
+                        <ProjectsList data={projects} />
                     </TabsContent>
                     <TabsContent value="createproject">
                         <ProjectCreate />
