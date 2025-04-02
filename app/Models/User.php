@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relasi ke tabel projects (Satu user dapat memiliki banyak proyek).
+     */
+    function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

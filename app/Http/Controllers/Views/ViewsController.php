@@ -13,6 +13,11 @@ class ViewsController extends Controller
     {
         return Inertia::render('dashboard');
     }
+
+    function projectManager()
+    {
+        return Inertia::render('dashboards/ProjectManager');
+    }
     
     function hero()
     {

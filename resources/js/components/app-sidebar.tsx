@@ -4,19 +4,50 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, LayoutPanelTop } from 'lucide-react';
 import AppLogo from './app-logo';
 
-const mainNavItems: NavItem[] = [
+
+const mainNavItems = [
     {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: LayoutGrid,
+        name: 'Menu Utama',
+        items: [
+            {
+                title: 'Dashboard',
+                href: '/dashboard',
+                icon: LayoutGrid,
+            },
+            {
+                title: 'Project Manajer',
+                href: '/dashboard/project',
+                icon: LayoutGrid,
+            },
+        ] as NavItem[],
     },
     {
-        title: 'Hero Section',
-        href: '/dashboard/hero',
-        icon: LayoutGrid,
+        name: 'Halaman Utama',
+        items: [
+            {
+                title: 'Hero Section',
+                href: '/dashboard/hero',
+                icon: LayoutPanelTop,
+            },
+            {
+                title: 'About Section',
+                href: '/dashboard/about',
+                icon: LayoutPanelTop,
+            },
+            {
+                title: 'Services Section',
+                href: '/dashboard/services',
+                icon: LayoutPanelTop,
+            },
+            {
+                title: 'Contact Section',
+                href: '/dashboard/contact',
+                icon: LayoutPanelTop,
+            },
+        ] as NavItem[],
     },
 ];
 
@@ -49,7 +80,9 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                {mainNavItems.map(item => (
+                    <NavMain {...item} />
+                ))}
             </SidebarContent>
 
             <SidebarFooter>
