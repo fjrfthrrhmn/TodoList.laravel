@@ -5,7 +5,7 @@ import { SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { ChevronRight, Sparkles } from 'lucide-react';
 
-export default function Welcome({ hero }: { hero: { title: string } }) {
+export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
 
     return (
@@ -15,8 +15,8 @@ export default function Welcome({ hero }: { hero: { title: string } }) {
                 <div className="flex max-w-xl flex-col items-center justify-center gap-4 text-center">
                     <Icon iconNode={Sparkles} />
 
-                    <Typography variant="h2" className="max-w-md">
-                        {hero.title}
+                    <Typography variant="h1" className="max-w-md">
+                        Catat, Lakukan dan Selesaikan!
                     </Typography>
                     <Typography variant="p">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa cumque ipsam cum soluta inventore saepe est delectus obcaecati
@@ -28,7 +28,9 @@ export default function Welcome({ hero }: { hero: { title: string } }) {
                     {auth.user ? (
                         <>
                             <Link method="post" href={route('logout')}>
-                                <Button variant="outline" className='text-red-500 hover:text-red-400'>Logout</Button>
+                                <Button variant="outline" className="text-red-500 hover:text-red-400">
+                                    Logout
+                                </Button>
                             </Link>
                             <Link href={route('dashboard')}>
                                 <Button>

@@ -1,0 +1,392 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My Project API",
+        "description": "API documentation for the project management system",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/api/project/list": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Get all data projects",
+                "operationId": "d99219b4c5960b0b0001e1a3d322b4a0",
+                "responses": {
+                    "200": {
+                        "description": "Data Ditemukan"
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Terjadi Kesalahan pada Server"
+                    }
+                }
+            }
+        },
+        "/api/project/detail/{id}": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Get data detail projects",
+                "operationId": "5543633750dccee867218b7c9b74f7a9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the project to update",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data Ditemukan"
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Terjadi Kesalahan pada Server"
+                    }
+                }
+            }
+        },
+        "/api/project/trash": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Get all data trash projects",
+                "operationId": "1772cb01f5eb2577287bb5bedf08b83e",
+                "responses": {
+                    "200": {
+                        "description": "Data Ditemukan"
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Terjadi Kesalahan pada Server"
+                    }
+                }
+            }
+        },
+        "/api/project/store": {
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Membuat project baru",
+                "operationId": "30bbba47b6c1186982bf206d15a1162b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "deadline"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Membuat UI Dashboard"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Bikin desain UI dashboard utama"
+                                    },
+                                    "icon": {
+                                        "type": "string",
+                                        "example": "📝"
+                                    },
+                                    "priority": {
+                                        "type": "string",
+                                        "enum": [
+                                            "low",
+                                            "medium",
+                                            "high",
+                                            "urgent"
+                                        ],
+                                        "example": "medium"
+                                    },
+                                    "deadline": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-12-31"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil"
+                    },
+                    "500": {
+                        "description": "Terjadi Kesalahan pada Server"
+                    }
+                }
+            }
+        },
+        "/api/project/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Delete a project by ID",
+                "operationId": "4d6976ec2f5deddc96c0e71eb7a9d18d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the project to delete",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Terjadi kesalahan pada server"
+                    }
+                }
+            }
+        },
+        "/api/project/update/{id}": {
+            "put": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Update a project by ID",
+                "operationId": "36d8e9beac1298206bf181cdb389c920",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the project to update",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Membuat Design Website"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Data berhasil diperbarui"
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan"
+                    },
+                    "500": {
+                        "description": "Terjadi kesalahan pada server"
+                    }
+                }
+            }
+        },
+        "/api/task/list": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get all tasks",
+                "operationId": "322afc4c6bffcc0e9dcde5efbe413813",
+                "responses": {
+                    "200": {
+                        "description": "Data ditemukan"
+                    }
+                }
+            }
+        },
+        "/api/task/detail/{id}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get detail task",
+                "operationId": "4c011717db4f06f20a563c03fcd44e3f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the task",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Data ditemukan"
+                    },
+                    "404": {
+                        "description": "Data tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/api/task/store/{project_id}": {
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Create new task",
+                "operationId": "d989199779707638e1a6caa24959cb12",
+                "parameters": [
+                    {
+                        "name": "project_id",
+                        "in": "path",
+                        "description": "ID of the project",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Mengerjakan halaman login"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Task berhasil ditambahkan"
+                    },
+                    "500": {
+                        "description": "Terjadi kesalahan"
+                    }
+                }
+            }
+        },
+        "/api/task/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Delete a task",
+                "operationId": "dff8936b0967495267f035ca3d90e8b5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the task",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Task berhasil dihapus"
+                    },
+                    "404": {
+                        "description": "Task tidak ditemukan"
+                    }
+                }
+            }
+        },
+        "/api/task/change-status/{id}": {
+            "put": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Update task status",
+                "operationId": "6c683e04fa216770da0e88e58edbdf8b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the task",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "status"
+                                ],
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": "completed"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Status task diperbarui"
+                    },
+                    "404": {
+                        "description": "Task tidak ditemukan"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Projects",
+            "description": "Projects"
+        },
+        {
+            "name": "Tasks",
+            "description": "Tasks"
+        }
+    ]
+}

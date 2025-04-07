@@ -25,19 +25,19 @@ export default function ProjectManagerPage({ projects }: { projects: RESPONSE_PR
                 <Tabs defaultValue="projects">
                     <TabsList>
                         {/* Tab untuk melihat daftar proyek */}
-                        <TabsTrigger className="lg:px-10 flex items-center gap-2" value="projects">
+                        <TabsTrigger className="flex items-center gap-2 lg:px-10" value="projects">
                             <List />
                             List Projects
                         </TabsTrigger>
 
                         {/* Tab untuk membuka form penambahan proyek baru */}
-                        <TabsTrigger className="lg:px-10 flex items-center gap-2" value="createproject">
+                        <TabsTrigger className="flex items-center gap-2 lg:px-10" value="createproject">
                             <Plus />
                             Tambah Project
                         </TabsTrigger>
 
                         {/* Tab untuk melihat proyek yang dihapus (dalam sampah) */}
-                        <TabsTrigger className="lg:px-10 flex items-center gap-2" value="trashproject">
+                        <TabsTrigger className="flex items-center gap-2 lg:px-10" value="trashproject">
                             <Trash2 />
                             Sampah Project
                         </TabsTrigger>
@@ -52,6 +52,9 @@ export default function ProjectManagerPage({ projects }: { projects: RESPONSE_PR
                     <TabsContent value="createproject">
                         <ProjectFormCreate />
                     </TabsContent>
+
+                    {/* Konten untuk tab "Sampah Projects" */}
+                    <TabsContent value="trashproject">Fitur Belum Tersedia.</TabsContent>
                 </Tabs>
             </main>
         </AppLayout>

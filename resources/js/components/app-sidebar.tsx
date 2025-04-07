@@ -4,7 +4,7 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, LayoutPanelTop } from 'lucide-react';
+import { BookOpen, ChartSpline, FileClock, Folder, Folders, Info, LayoutGrid, PanelsTopLeft, Settings } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems = [
@@ -17,36 +17,51 @@ const mainNavItems = [
                 icon: LayoutGrid,
             },
             {
-                title: 'Project Manajer',
-                href: '/dashboard/projects',
-                icon: LayoutGrid,
+                title: 'Analisis',
+                href: '#',
+                icon: ChartSpline,
+            },
+            {
+                title: 'Informasi',
+                href: '#',
+                icon: Info,
+            },
+            {
+                title: 'Pengaturan',
+                href: '#',
+                icon: Settings,
             },
         ] as NavItem[],
     },
     {
-        name: 'Halaman Utama',
+        name: 'Manajemen',
         items: [
             {
-                title: 'Hero Section',
-                href: '/dashboard/hero',
-                icon: LayoutPanelTop,
+                title: 'Project Manajer',
+                href: '/dashboard/projects',
+                icon: Folders,
             },
             {
-                title: 'About Section',
-                href: '/dashboard/about',
-                icon: LayoutPanelTop,
+                title: 'Pages',
+                href: '#',
+                icon: PanelsTopLeft,
+            },
+        ],
+    },
+    {
+        name: 'Notifikasi',
+        items: [
+            {
+                title: 'Aktifitas Terbaru',
+                href: '#',
+                icon: FileClock,
             },
             {
-                title: 'Services Section',
-                href: '/dashboard/services',
-                icon: LayoutPanelTop,
+                title: 'Pembaruan Sistem',
+                href: '#',
+                icon: PanelsTopLeft,
             },
-            {
-                title: 'Contact Section',
-                href: '/dashboard/contact',
-                icon: LayoutPanelTop,
-            },
-        ] as NavItem[],
+        ],
     },
 ];
 

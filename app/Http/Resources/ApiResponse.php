@@ -17,20 +17,21 @@ class ApiResponse extends JsonResource
         return parent::toArray($request);
     }
 
-    public static function success($data, $message = 'Success', $status = 200)
+    public static function success($data = null, $message = 'Success', $status = 200)
     {
         return response()->json([
             'success' => true,
             'message' => $message,
-            'data' => $data,
+            'data' => $data ?? [],
         ], $status);
     }
 
-    public static function error($message = 'Error', $status = 400)
+    public static function error($errors = null, $message = 'Terjadi Kesalahan', $status = 400)
     {
         return response()->json([
             'success' => false,
             'message' => $message,
+            'errors' => $errors ?? [],
         ], $status);
     }
 }

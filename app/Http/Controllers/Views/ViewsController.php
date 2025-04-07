@@ -19,28 +19,28 @@ class ViewsController extends Controller
     function projectManager()
     {
         return Inertia::render('dashboards/ProjectManagerPage', [
-            'projects' => Project::where('user_id', Auth::id())->latest()->get()
+            'projects' => Project::where('user_id', Auth::id())->orderByDesc('id')->get(),
         ]);
     }
 
-    function projectDetail(String $id)
+    function projectDetail(string $id)
     {
+        $project = Project::with([
+            'tasks' => function ($items) { $items->orderByDesc('id'); }
+        ])->findOrFail($id);
+
         return Inertia::render('dashboards/ProjectDetailPage', [
-            'project' => Project::with('tasks')->findOrFail($id),
+            'project' => $project,
         ]);
     }
 
     function hero()
     {
-        return Inertia::render('dashboards/Hero', [
-            'data' => Hero::findOrFail(1)
-        ]);
+        return Inertia::render('dashboards/Hero');
     }
 
     function home()
     {
-        return Inertia::render('welcome', [
-            'hero' => Hero::findOrFail(1)
-        ]);
+        return Inertia::render('welcome');
     }
 }

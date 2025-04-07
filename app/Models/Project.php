@@ -44,4 +44,5 @@ class Project extends Model
     {
         return $this->deadline ? Carbon::parse($this->deadline)->translatedFormat('l, j F Y') : null;
     }
+    
 }

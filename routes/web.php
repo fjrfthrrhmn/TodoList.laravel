@@ -17,7 +17,6 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () 
     Route::get('/', [ViewsController::class, 'dashboard'])->name('dashboard');
     Route::get('projects', [ViewsController::class, 'projectManager'])->name('project.manager');
     Route::get('project/{id}', [ViewsController::class, 'projectDetail'])->name('project.detail');
-    Route::get('hero', [ViewsController::class, 'hero'])->name('hero');
 });
 
 // * Group route untuk aksi (actions),
@@ -45,12 +44,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Menghapus task berdasarkan ID
     Route::delete('task/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
-
-
-    // * === ROUTE ACTION HERO SECTION ===
-
-    // Memperbarui konten hero section berdasarkan ID
-    Route::put('hero/{id}', [HeroController::class, 'update'])->name('hero.update');
 });
 
 
