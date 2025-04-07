@@ -38,7 +38,13 @@ class ProjectController extends Controller
 
     function destory(String $id)
     {
-        Project::find($id)->delete();
+        Project::findOrFail($id)->delete();
         return to_route('project.manager');
+    }
+
+    function update(Request $request, String $id)
+    {
+        Project::findOrFail($id)->update($request->all());
+        return to_route('project.detail', $request->id);
     }
 }

@@ -7,7 +7,6 @@ import { Link } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid, LayoutPanelTop } from 'lucide-react';
 import AppLogo from './app-logo';
 
-
 const mainNavItems = [
     {
         name: 'Menu Utama',
@@ -19,7 +18,7 @@ const mainNavItems = [
             },
             {
                 title: 'Project Manajer',
-                href: '/dashboard/project',
+                href: '/dashboard/projects',
                 icon: LayoutGrid,
             },
         ] as NavItem[],
@@ -80,8 +79,8 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                {mainNavItems.map(item => (
-                    <NavMain {...item} />
+                {mainNavItems.map((item) => (
+                    <NavMain key={item.name} {...item} />
                 ))}
             </SidebarContent>
 

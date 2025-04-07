@@ -1,4 +1,4 @@
-import { RESPONSE_PROJECT } from '@/types';
+import { RESPONSE_PROJECT } from '@/types/response';
 import { Link, router } from '@inertiajs/react';
 import { CalendarClock, Trash2 } from 'lucide-react';
 import { FormEventHandler } from 'react';
@@ -6,7 +6,8 @@ import { Button } from '../ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '../ui/card';
 
 const CardProject = (props: RESPONSE_PROJECT) => {
-    const submit: FormEventHandler = (e) => {
+    
+    const Destroy: FormEventHandler = (e) => {
         e.preventDefault();
         if (confirm('Apakah anda yakin menghapus Project ini?')) {
             router.delete(route('project.destroy', props.id), {
@@ -14,9 +15,10 @@ const CardProject = (props: RESPONSE_PROJECT) => {
             });
         }
     };
+    
     return (
         <Card>
-            <Link href="#">
+            <Link href={`/dashboard/project/${props.id}`}>
                 <CardHeader>
                     <span className="text-2xl">{props.icon}</span>
                     <h4 className="line-clamp-3 text-xl font-bold">{props.title}</h4>
@@ -31,7 +33,7 @@ const CardProject = (props: RESPONSE_PROJECT) => {
                     <CalendarClock size="18" />
                     {props.formated_deadline}
                 </small>
-                <Button onClick={submit}>
+                <Button onClick={Destroy}>
                     <Trash2 />
                 </Button>
             </CardFooter>

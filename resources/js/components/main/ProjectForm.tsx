@@ -3,6 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { RESPONSE_PROJECT } from '@/types/response';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
@@ -15,7 +16,7 @@ interface FORM_PROJECT {
     deadline: string;
 }
 
-const ProjectCreate = () => {
+const ProjectFormCreate = () => {
     const { post, data, setData, processing, reset } = useForm<FORM_PROJECT>({
         title: '',
         deadline: '',
@@ -79,7 +80,6 @@ const ProjectCreate = () => {
                             <SelectItem value="low">Rendah</SelectItem>
                             <SelectItem value="medium">Sedang</SelectItem>
                             <SelectItem value="high">Tinggi</SelectItem>
-                            <SelectItem value="urgent">Sangat Urgent</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
@@ -96,4 +96,83 @@ const ProjectCreate = () => {
     );
 };
 
-export default ProjectCreate;
+const ProjectFormUpdate = ({ dataDefault }: { dataDefault: RESPONSE_PROJECT }) => {
+    const { put, data, setData, processing, reset } = useForm<FORM_PROJECT>({
+        title: dataDefault.title,
+        deadline: dataDefault.deadline,
+        description: dataDefault.description,
+        icon: dataDefault.icon,
+        priority: dataDefault.priority,
+    });
+
+    //
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+        console.log(data);
+        put(route('project.update', dataDefault.id), {
+            onFinish: () => reset(),
+            onError: (e) => console.log(e),
+            onSuccess: () => alert('Berhasil Menupdate Project!'),
+        });
+    };
+
+    return (
+        <form className="max-w-xl space-y-4 py-4" onSubmit={submit}>
+            <div className="flex flex-col gap-2">
+                <div>
+                    <Label htmlFor="title">Judul</Label>
+                    <Input
+                        name="title"
+                        value={data.title}
+                        placeholder="Masukan Judul Project"
+                        onChange={(e) => setData('title', e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <Label htmlFor="icon">Icon</Label>
+                    <Input
+                        name="icon"
+                        value={data.icon}
+                        placeholder="Masukan Icon Project - default 📝"
+                        onChange={(e) => setData('icon', e.target.value)}
+                        maxLength={2}
+                    />
+                </div>
+                <div>
+                    <Label htmlFor="description">Deskripsi</Label>
+                    <Textarea
+                        value={data.description}
+                        name="description"
+                        placeholder="Masukan Deskripsi Project"
+                        onChange={(e) => setData('description', e.target.value)}
+                        required
+                    />
+                </div>
+                <div>
+                    <Label htmlFor="priority">Prioritas</Label>
+                    <Select name="priority" value={data.priority} onValueChange={(e) => setData('priority', e)}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Masukan Prioritas Project - default Sedang" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="low">Rendah</SelectItem>
+                            <SelectItem value="medium">Sedang</SelectItem>
+                            <SelectItem value="high">Tinggi</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+                <div>
+                    <Label htmlFor="deadline">Deadline</Label>
+                    <Input name="deadline" type="date" value={data.deadline} onChange={(e) => setData('deadline', e.target.value)} required />
+                </div>
+
+                <Button disabled={processing} className="mt-6 w-full">
+                    {processing ? 'Submiting...' : 'Submit'}
+                </Button>
+            </div>
+        </form>
+    );
+};
+
+export { ProjectFormCreate, ProjectFormUpdate };

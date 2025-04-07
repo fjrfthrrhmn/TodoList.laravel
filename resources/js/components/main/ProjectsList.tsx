@@ -1,4 +1,4 @@
-import { RESPONSE_PROJECT } from '@/types';
+import { RESPONSE_PROJECT } from '@/types/response';
 import Typography from '../ui/typography';
 import CardProject from './CardProject';
 
@@ -17,17 +17,17 @@ const ProjectsList = ({ data }: { data: RESPONSE_PROJECT[] }) => {
         {
             label: 'Tinggi',
             color: 'border-orange-300',
-            items: [],
+            items: data.filter((e) => e.priority === 'high') || [],
         },
-        {
-            label: 'Mendesak',
-            color: 'border-red-400',
-            items: [],
-        },
+        // {
+        //     label: 'Mendesak',
+        //     color: 'border-red-400',
+        //     items: data.filter((e) => e.priority === 'urgent') || [],
+        // },
     ];
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 py-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 py-4">
             {ProjectsSection.map((item) => (
                 <div>
                     <div className={`border-b-4 ${item.color} mb-4 pb-2`}>
