@@ -13,11 +13,11 @@ class ProjectController extends Controller
     function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'title' => 'required|string|max:225',
+            'description' => 'required|string|max:225',
             'icon' => 'nullable|string|min:0|max:2',
+            'priority' => 'nullable|in:low,medium,high,urgent',
             'deadline' => 'required',
-            'priority' => 'nullable|in:low,medium,high,urgent'
         ]);
 
         if ($validator->fails()) {
@@ -28,8 +28,8 @@ class ProjectController extends Controller
             'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
-            'icon' => $request->icon,
-            'priority' => $request->priority,
+            'icon' => $request->icon ?? '📝',
+            'priority' => $request->priority ?? 'medium',
             'deadline' => $request->deadline,
         ]);
 
@@ -39,12 +39,12 @@ class ProjectController extends Controller
     function destory(String $id)
     {
         Project::findOrFail($id)->delete();
-        return to_route('project.manager');
+        return redirect()->back();
     }
 
     function update(Request $request, String $id)
     {
         Project::findOrFail($id)->update($request->all());
-        return to_route('project.detail', $request->id);
+        return redirect()->back();
     }
 }

@@ -26,8 +26,7 @@ class TaskController extends Controller
             'title' => $request->title,
             'description' => $request->description,
         ]);
-
-        return to_route('project.detail', $id);
+        return redirect()->back();
     }
 
     // 

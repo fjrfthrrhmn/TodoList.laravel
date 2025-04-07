@@ -18,16 +18,22 @@ const CardProject = (props: RESPONSE_PROJECT) => {
     
     return (
         <Card>
+            {/* Head */}
             <Link href={`/dashboard/project/${props.id}`}>
                 <CardHeader>
-                    <span className="text-2xl">{props.icon}</span>
+                    <span className="text-3xl">{props.icon}</span>
                     <h4 className="line-clamp-3 text-xl font-bold">{props.title}</h4>
                 </CardHeader>
             </Link>
+
+            {/* Body */}
             <CardContent>
                 <CardDescription>{props.description}</CardDescription>
             </CardContent>
+
             <div className="border-b" />
+            
+            {/* Footer */}
             <CardFooter className="flex items-center justify-between">
                 <small className="flex gap-2">
                     <CalendarClock size="18" />

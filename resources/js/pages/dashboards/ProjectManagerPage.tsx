@@ -11,7 +11,9 @@ export default function ProjectManagerPage({ projects }: { projects: RESPONSE_PR
     return (
         <AppLayout>
             <Head title="Project Manajer" />
+
             <main className="space-y-6">
+                {/* Head */}
                 <Title
                     name="Kelola Proyek Anda dengan Mudah"
                     description="Kelola, pantau, dan rapikan semua proyek Anda dengan antarmuka yang sederhana dan efisien."
@@ -19,25 +21,34 @@ export default function ProjectManagerPage({ projects }: { projects: RESPONSE_PR
 
                 <div className="border-b-2" />
 
+                {/* Body */}
                 <Tabs defaultValue="projects">
                     <TabsList>
-                        <TabsTrigger className="lg:px-10" value="projects">
+                        {/* Tab untuk melihat daftar proyek */}
+                        <TabsTrigger className="lg:px-10 flex items-center gap-2" value="projects">
                             <List />
                             List Projects
                         </TabsTrigger>
-                        <TabsTrigger className="lg:px-10" value="createproject">
+
+                        {/* Tab untuk membuka form penambahan proyek baru */}
+                        <TabsTrigger className="lg:px-10 flex items-center gap-2" value="createproject">
                             <Plus />
                             Tambah Project
                         </TabsTrigger>
-                        <TabsTrigger className="lg:px-10" value="trashproject">
+
+                        {/* Tab untuk melihat proyek yang dihapus (dalam sampah) */}
+                        <TabsTrigger className="lg:px-10 flex items-center gap-2" value="trashproject">
                             <Trash2 />
                             Sampah Project
                         </TabsTrigger>
                     </TabsList>
-                    
+
+                    {/* Konten untuk tab "List Projects" */}
                     <TabsContent value="projects">
                         <ProjectsList data={projects} />
                     </TabsContent>
+
+                    {/* Konten untuk tab "Tambah Project" */}
                     <TabsContent value="createproject">
                         <ProjectFormCreate />
                     </TabsContent>

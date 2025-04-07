@@ -19,11 +19,6 @@ const ProjectsList = ({ data }: { data: RESPONSE_PROJECT[] }) => {
             color: 'border-orange-300',
             items: data.filter((e) => e.priority === 'high') || [],
         },
-        // {
-        //     label: 'Mendesak',
-        //     color: 'border-red-400',
-        //     items: data.filter((e) => e.priority === 'urgent') || [],
-        // },
     ];
 
     return (
@@ -34,7 +29,7 @@ const ProjectsList = ({ data }: { data: RESPONSE_PROJECT[] }) => {
                         <Typography variant="h3">{item.label}</Typography>
                     </div>
 
-                    <div className='space-y-4'>{item.items && item.items.map((props: RESPONSE_PROJECT) => <CardProject {...props} />)}</div>
+                    <div className='space-y-4'>{item.items.length > 0 ? item.items.map((props: RESPONSE_PROJECT) => <CardProject {...props} />): 'Tidak ada Project ditemukan.'}</div>
                 </div>
             ))}
         </div>

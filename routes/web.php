@@ -7,33 +7,54 @@ use App\Http\Controllers\Views\ViewsController;
 use App\Models\Project;
 use Illuminate\Support\Facades\Route;
 
+// Route untuk halaman home (landing page)
 Route::get('/', [ViewsController::class, 'home'])->name('home');
 
-// Route untuk Views
+// * Group route untuk tampilan dashboard, hanya bisa diakses oleh user yang sudah login 
 Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () {
+
+    // Dashboard utama
     Route::get('/', [ViewsController::class, 'dashboard'])->name('dashboard');
     Route::get('projects', [ViewsController::class, 'projectManager'])->name('project.manager');
     Route::get('project/{id}', [ViewsController::class, 'projectDetail'])->name('project.detail');
     Route::get('hero', [ViewsController::class, 'hero'])->name('hero');
 });
 
-// Route untuk Actions
+// * Group route untuk aksi (actions),
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Action Project
+
+    // * === ROUTE ACTION PROJECT ===
+
+    // Menyimpan data project baru ke database
     Route::post('project', [ProjectController::class, 'store'])->name('project.store');
+
+    // Memperbarui data project berdasarkan ID
     Route::put('project/{id}', [ProjectController::class, 'update'])->name('project.update');
+
+    // Menghapus project berdasarkan ID
     Route::delete('project/{id}', [ProjectController::class, 'destory'])->name('project.destroy');
-    
-    // Action Task
+
+
+    // * === ROUTE ACTION TASK ===
+
+    // Menambahkan task baru ke dalam project tertentu (berdasarkan ID project)
     Route::post('task/{id}', [TaskController::class, 'store'])->name('task.store');
+
+    // Mengubah status task (misalnya dari pending menjadi done)
     Route::put('task/{id}', [TaskController::class, 'changeStatus'])->name('task.changeStatus');
+
+    // Menghapus task berdasarkan ID
     Route::delete('task/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
-    
-    // Action Frontend
+
+
+    // * === ROUTE ACTION HERO SECTION ===
+
+    // Memperbarui konten hero section berdasarkan ID
     Route::put('hero/{id}', [HeroController::class, 'update'])->name('hero.update');
 });
 
-Route::get('project/{id}', function (String $id) {
+
+Route::get('project/{id}', function (string $id) {
     return response()->json([
         'project' => Project::with('tasks')->findOrFail($id)
     ]);
